@@ -1,27 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 import numpy
 
 
 # Trying to determine the power required during cruise only (for now) with no wind (for now).
 
-# ## Inputs
 
-# In[19]:
-
+## Inputs
 
 F_d = 50 #Flight Distance [kilometers]
 alpha = 3 #Angle of attack [degrees] half of 6 which is what is specified as maximum in the energy efficent arrival paper
 
 
-# ## Givens
-
-# In[20]:
-
+## Givens
 
 V_cruise = 50.41 #Cruise speed [m/s]
 R = 4.0 #Radius of the rotor [m]
@@ -38,21 +31,13 @@ g = 9.81 #Acceleration due to gravity [9.81 m/s^2]
 Thee = 0 #Rotor tip-path-plane roll angle [degrees]
 Theta = alpha #Rotor tip-path-plane pitch angle   ###Theta = Alpha for level flight
 
-
-# ## Flight Time
-
-# In[21]:
-
+## Flight Time
 
 #Assuming constant V_cruise for the duration of the flight
 Tf = (F_d*1000)/V_cruise #Time of flight [seconds]
 print("The total time of flight is", round(Tf, 2), "seconds, or", numpy.round(Tf/60, 2), "minutes")
 
-
-# ## Thrust
-
-# In[22]:
-
+## Thrust
 
 T = m*g/(numpy.cos(Thee*numpy.pi/180)*numpy.cos(Theta*numpy.pi/180)) #Total eVTOL thrust [N]
 T_rotor = T/4
@@ -60,11 +45,7 @@ T_rotor = T/4
 print("The thrust on each rotor is", round(T_rotor/1000,2), "kN")
 print("The total thrust required is", round(T/1000, 2), "kN")
 
-
-# ## Induced Velocity (Vi) and Hover Induced Velocity (Vh)
-
-# In[23]:
-
+## Induced Velocity (Vi) and Hover Induced Velocity (Vh)
 
 Vh = numpy.sqrt(T_rotor/(2*rho*A_rotor))  #Hover induced velocity
 
@@ -86,11 +67,7 @@ if y-Vi < 0.001:
 else:
     print("***Check Vi***")
 
-
-# ## Power
-
-# In[24]:
-
+## Power
 
 #Induced Power
 P_ind_rot = k*T_rotor*Vi
@@ -106,20 +83,12 @@ P_required = (P_ind_rot*4+P_parasite+P_prof) #[W]
 
 print("The power required for the flight is", round(P_required/1000, 2), "kW")
 
-
-# ## Energy (Performance Index)
-
-# In[25]:
-
+## Energy (Performance Index)
 
 E_total = (P_required*Tf)/1E6 #[MJ]
 print("The total energy consumption during the flight is", round(E_total, 2), "MJ")
 
-
-# ## Summary
-
-# In[26]:
-
+## Summary
 
 print('Alpha = {}°'.format(alpha))
 print("Flight Distance =", round(F_d), "km")
@@ -137,7 +106,6 @@ print("Energy:")
 print("     --> Total Energy =", round(E_total, 2), "MJ <--")
 
 
-# In[ ]:
 
 
 
