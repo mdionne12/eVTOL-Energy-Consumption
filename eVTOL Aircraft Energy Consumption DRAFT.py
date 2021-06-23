@@ -10,8 +10,8 @@ import numpy
 
 ## Inputs
 
-F_d = 50 #Flight Distance [kilometers]
-alpha = 3 #Angle of attack [degrees] half of 6 which is what is specified as maximum in the energy efficent arrival paper
+F_d = input("Enter the flight distance in kilometers: ") #Flight Distance [kilometers] #default is 50
+alpha = input("Enter the angles of attack in degrees: ") #Angle of attack [degrees] # default is half of 6 which is what is specified as maximum in the energy efficent arrival paper
 
 
 ## Givens
